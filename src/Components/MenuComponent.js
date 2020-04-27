@@ -6,8 +6,8 @@ class Menu extends Component{
     constructor(props){
         super(props); //immediate parent class constructor
 
-        this.state = {
-            dishes: [
+        this.state = { //its a property i guess
+            dishes: [  //dishes is a variable
             {
                 id: 0,
                 name:'Uthappizza',
@@ -53,6 +53,8 @@ render(){
     const menu=this.state.dishes.map((dish) => {   //so ami variable ta ke ekhane banailam jaate ami return e variable ta dite pari
         return( // ekhane bolte gele amra menu ta ke render ar structure korlam jate amra pore use korte pari
             //so this was out component
+            //dish ta kemne shajano thakbe oita bollam
+            //array hishabe ekhane anlam arki
             <div key={dish.id} className="col-12 mt-5">             
               <Media tag="li">
                   <Media left middle>
@@ -68,10 +70,10 @@ render(){
     }) ; //menu defined as a JS variable
     //mapping
 
-        return( // seems like we can use JS variables inside my GSX menu is a JS variable
+        return( // seems like we can use JS variables inside my JSX menu is a JS variable
             <div className="container">
                 <div className="row"> 
-                    <Media list>
+                    <Media list> {/* list na dile horizontal hoye jabe */}
                         {menu} 
                     </Media>
                 </div>
