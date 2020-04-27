@@ -9,7 +9,8 @@ ReactDOM.render(
   
     <App />,
   
-  document.getElementById('root')
+  document.getElementById('root') //the structure from the .html and <App> for the rendering purpose
+  //index.js e ki khali shudhu amra grouping kortesi?
 );
 
 // If you want your app to work offline and load faster, you can change
