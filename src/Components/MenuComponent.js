@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import DishDetail from './DishdetailComponent';
 //menu so it would return a list of dishes in my restaurant
-class Menu extends Component{ //this is a component
+class Menu extends Component { //this is a component
    
     constructor(props){
         super(props); //immediate parent class constructor
@@ -19,13 +20,9 @@ class Menu extends Component{ //this is a component
         //AJKE ar jodi null na hoy tahole if e jabo as said per condition
          if(dish!=null){
             return(
-                <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name}  />
-                    <CardBody>
-                            <CardTitle>{dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                //selected dish ami dishdetails e pathabo
+               <DishDetail SelectedDishes={this.state.selectedDish} />
+               
             );
          }
          else{
@@ -46,7 +43,7 @@ render(){
             //ETA VARIABLE CALL ER RETURN over here which is menu
             <div key={dish.id} className="col-12 col-md-5 m-1">             
               <Card onClick={()=> this.onDishSelect(dish)}>  {/* BUT HOW DOES IT KNOW THAT IT IS A LOOP   */}
-                  
+                  {/* Nicher shathe toh onCLick er kono relationship nai remember that   */}
                         <CardImg width="100%" src={dish.image} alt={dish.name}  />
                                       
                         <CardImgOverlay body className="ml-4"> {/*ml to slide the title left and right */}
@@ -68,7 +65,7 @@ render(){
                     
                 </div>
                 <div className="row">
-                    {this.renderDish(this.state.selectedDish)}
+                    {this.renderDish(this.state.selectedDish)} {/* This deals with the onClick event   */}
                 </div>
             </div>
             ); 
