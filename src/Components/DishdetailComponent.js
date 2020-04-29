@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 
 class DishDetail extends React.Component{
-    constructor(props){
-        super(props); //immediate parent class constructor
-        //no state variables yet
-    } //selected dish ami props e catch korlam jeta menucomponents e pathalo amake
+    //selected dish ami props e catch korlam jeta menucomponents e pathalo amake
    //PRESENTATIONAL COOOMPONENTS
    
+   componentDidMount(){
 
+    console.log("DishdetailComponent DidMount method has been invoked");
+}
+componentDidUpdate(){
+    console.log("DishdetailComponent DidUpdate method has been invoked");
 
+}
 //renderDIsh
 //renderCOmments 
 //i used it but all in one
 
-renderComments(dishes){
+renderComments(dishes){  //the variable came in from the bottom
      //accessing array inside the array
         if(dishes!=null){
            
@@ -47,7 +50,7 @@ renderComments(dishes){
     //selectedDish to dish
     renderDish(dishes){
 if(this.props.dish!=null){
-    // {new Intl.DateTimeFormat('en-US',{year: 'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse {dish.date})</p>
+  
     return(
 
         <CardBody>
@@ -69,7 +72,10 @@ else{
 ////////////////////////////////////////
 
     render(){ //this is like another constructor
-   
+        
+        
+    console.log("DishdetailComponent render has been invoked");
+
 
         return(
 
@@ -77,7 +83,8 @@ else{
     <div className="row">
 
         <div className="col-12 col-md-5 m-1">
-                 {this.renderDish(this.props.dish)}
+                 {this.renderDish(this.props.dish)}    
+                 {/* nai */}
         </div>
         {/*nicher ta comment section*/}
 

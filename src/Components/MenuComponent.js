@@ -6,12 +6,19 @@ class Menu extends Component { //this is a component
    
     constructor(props){
         super(props); //immediate parent class constructor
-
+        console.log("MenuComponent constructor has been invoked");
         
     }
+componentDidMount(){
+
+    console.log("MenuComponent DidMount method has been invoked");
+}
+
 render(){
 
     const menu=this.props.dishes.map( (dish) => {   //so ami variable ta ke ekhane banailam jaate ami return e variable ta dite pari &dish is a variable
+
+        console.log("MenuComponent render has been invoked");
         return( // ekhane bolte gele amra menu ta ke render ar structure korlam jate amra pore use korte pari
             //so this was out component
             //dish ta kemne shajano thakbe oita bollam

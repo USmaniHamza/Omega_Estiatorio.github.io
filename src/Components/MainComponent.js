@@ -36,7 +36,9 @@ class Main extends Component {
        
         <DishDetail 
         dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish )[0]} />   {/* ekhane kintu shob check kortesena khali id ta by using the first index*/}
+       {/* JEI ARRAY TA FILTER OUT KORSI SINCE EKTAI ARRAY SO INDEX 0 DIYE KORSI DUITA ELEMENT HOLE [0] or [1] diye hoito */}
         {/* //will get access to each dish AJKE */}
+
         {/* filter array er moddhe the dish is the variable declared as an interator for accessing the index just like in maps AJKE */}
         {/* ar selectedDish er moddhe kintu dishID ase not the details of the entire dish AJKE */}
         {/* filter is the constrainted part of the array AJKE */}

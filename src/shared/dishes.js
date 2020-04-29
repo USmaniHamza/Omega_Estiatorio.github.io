@@ -45,6 +45,7 @@ export const DISHES = //that is the variable for the array
             date: "2011-12-02T17:57:28.556094Z"
             }
         ]                        },
+
         {
         id: 1,  //this is index 1
         name:'Zucchipakoda',
@@ -91,6 +92,7 @@ export const DISHES = //that is the variable for the array
             }
         ]
         },
+        
         {
         id: 2,
         name:'Vadonut',
