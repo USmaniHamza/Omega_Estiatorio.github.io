@@ -6,6 +6,7 @@ class DishDetail extends React.Component{
         super(props); //immediate parent class constructor
         //no state variables yet
     } //selected dish ami props e catch korlam jeta menucomponents e pathalo amake
+   //PRESENTATIONAL COOOMPONENTS
    
 
 
@@ -23,11 +24,11 @@ renderComments(dishes){
                  
                     <ul key={dish.id} className = "list-unstyled">
                     <p>{dish.comment}</p>
-                    <p>--{dish.author},{dish.date}</p>
+                    <p>--{dish.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(dish.date)))} </p>
                     </ul>
                   );
 
-        });
+        }); //chorami BUDDHI EI RENDER OCMMENTS TA PLEASE TAKE A LOOK
         return(
             <div>
                 <h4>Comments</h4>
@@ -43,15 +44,16 @@ renderComments(dishes){
         }
     }
     ////////////////////////////////////
-    renderDish(dish){
-if(this.props.SelectedDishes!=null){
-
+    //selectedDish to dish
+    renderDish(dishes){
+if(this.props.dish!=null){
+    // {new Intl.DateTimeFormat('en-US',{year: 'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse {dish.date})</p>
     return(
 
         <CardBody>
-                <CardImg width="100%"  src={this.props.SelectedDishes.image} alt={this.props.SelectedDishes.name}  />
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
+                <CardImg width="100%"  src={this.props.dish.image} alt={this.props.dish.name}  />
+                <CardTitle>{dishes.name}</CardTitle>
+                <CardText>{dishes.description}</CardText>
         </CardBody>
 
 );
@@ -75,9 +77,7 @@ else{
     <div className="row">
 
         <div className="col-12 col-md-5 m-1">
-                 {this.renderDish(this.props.SelectedDishes)}
-              
-
+                 {this.renderDish(this.props.dish)}
         </div>
         {/*nicher ta comment section*/}
 
@@ -85,7 +85,7 @@ else{
                 
             
                     <CardBody> 
-                    {this.renderComments(this.props.SelectedDishes)}
+                    {this.renderComments(this.props.dish)}
                     </CardBody>            
                 
         </div>

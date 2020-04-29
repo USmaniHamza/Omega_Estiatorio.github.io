@@ -1,7 +1,7 @@
 export const DISHES = //that is the variable for the array
     [
         {
-        id: 0,
+        id: 0, //index zero teh eii pura jinish ase ar index 1 niche aksi
         name:'Uthappizza',
         image: 'assets/images/uthappizza.png',
         category: 'mains',
@@ -46,7 +46,7 @@ export const DISHES = //that is the variable for the array
             }
         ]                        },
         {
-        id: 1,
+        id: 1,  //this is index 1
         name:'Zucchipakoda',
         image: 'assets/images/zucchipakoda.png',
         category: 'appetizer',

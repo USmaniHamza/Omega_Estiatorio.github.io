@@ -1,38 +1,14 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import DishDetail from './DishdetailComponent';
+//import dishdetail moved to main component AJKE
 //menu so it would return a list of dishes in my restaurant
 class Menu extends Component { //this is a component
    
     constructor(props){
         super(props); //immediate parent class constructor
 
-        this.state = { //its a property i guess, nijer variable
-            selectedDish: null
-        }
+        
     }
-    onDishSelect(dish){
-         this.setState({selectedDish:dish}); //AJKEE if we want to update the variable over 
-
-    }
-    renderDish(dish){ //the variable that is going to be passed here
-        // AJKE so if the selected dish is null then else e giye khali dekhabo
-        //AJKE ar jodi null na hoy tahole if e jabo as said per condition
-         if(dish!=null){
-            return(
-                //selected dish ami dishdetails e pathabo
-               <DishDetail SelectedDishes={this.state.selectedDish} />
-               
-            );
-         }
-         else{
-             return(
-                <div></div>
-             );
-         }
-
-    }
-
 render(){
 
     const menu=this.props.dishes.map( (dish) => {   //so ami variable ta ke ekhane banailam jaate ami return e variable ta dite pari &dish is a variable
@@ -42,7 +18,8 @@ render(){
             //array hishabe ekhane anlam arki
             //ETA VARIABLE CALL ER RETURN over here which is menu
             <div key={dish.id} className="col-12 col-md-5 m-1">             
-              <Card onClick={()=> this.onDishSelect(dish)}>  {/* BUT HOW DOES IT KNOW THAT IT IS A LOOP   */}
+              <Card onClick={() => this.props.onClick(dish.id)}>  {/* BUT HOW DOES IT KNOW THAT IT IS A LOOP   AJKE */}
+              {/* ja click kora hoise okhan theke ami dish.id ta nibo */}
                   {/* Nicher shathe toh onCLick er kono relationship nai remember that   */}
                         <CardImg width="100%" src={dish.image} alt={dish.name}  />
                                       
@@ -64,9 +41,9 @@ render(){
                         {menu} 
                     
                 </div>
-                <div className="row">
-                    {this.renderDish(this.state.selectedDish)} {/* This deals with the onClick event   */}
-                </div>
+                
+                    {/* {this.renderDish(this.state.selectedDish)} This deals with the onClick event   */}
+                
             </div>
             ); 
         }
