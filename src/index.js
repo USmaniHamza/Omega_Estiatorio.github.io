@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker'; //registerserviceworker module
 
 ReactDOM.render(
   
-    <App />, //the app component
+    <App />,
   
   document.getElementById('root') //the structure from the .html and <App> for the rendering purpose
   //index.js e ki khali shudhu amra grouping kortesi?
