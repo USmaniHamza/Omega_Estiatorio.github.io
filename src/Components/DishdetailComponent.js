@@ -61,7 +61,7 @@ else{
         <div className="col-12 col-md-5 m-1">
                     <CardBody> 
                     <RenderComments dish={props.dish} /> 
-                    {/* sender receiver same value thakte hobe as parameters */}
+                    sender receiver same value thakte hobe as paramen
                     </CardBody>            
                 
         </div>
