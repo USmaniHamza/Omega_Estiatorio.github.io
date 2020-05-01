@@ -1,14 +1,17 @@
 import React  from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Col } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Col ,BreadcrumbItem, Breadcrumb} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
-function RenderComments({dish}){  
-        if(dish!=null){
+
+
+function RenderComments({comments}){  
+        if(comments!=null){
            
-            const dishComments=dish.comments.map( (dish) => { 
+            const dishComments=comments.map( (comment) => { 
             return( 
-                    <ul key={dish.id} className = "list-unstyled">
-                    <p>{dish.comment}</p>
-                    <p>--{dish.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(dish.date)))} </p>
+                    <ul key={comment.id} className = "list-unstyled">
+                    <p>{comment.comment}</p>
+                    <p>--{comment.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} </p>
                     </ul>
                   );
 
@@ -26,52 +29,60 @@ function RenderComments({dish}){
             );
         }
     }
+
 function RenderDish({dish}){ //not used yet
-        if(dish!=null){
+                if(dish!=null){
   
                         return(
-
-                            <CardBody>
-                                    <CardImg width="100%"  src={dish.image} alt={dish.name}  />
+                    <div className="col-12 col-md-5 m-1">
+                        <Card>
+                            <CardImg width="100%"  src={dish.image} alt={dish.name}  />
+                            <CardBody>                                    
                                     <CardTitle>{dish.name}</CardTitle>
                                     <CardText>{dish.description}</CardText>
                             </CardBody>
+                        </Card>
+                    </div>
                         );
 
-}
-else{
-    return(
-        <div></div>
-    );
-}
-    }
+                    }
+                    else{
+                        return(
+                            <div></div>
+                        );
+                    }
+                        }
 
 
-    const DishDetail =(props) => { // we have dish which is a size of 1 index array from the Main
-         return(
+            const DishDetail =(props) => { // we have dish which is a size of 1 index array from the Main
+                return(
 
-<div className="container">
-    <div className="row">
+                <div className="container">
 
-        <div className="col-12 col-md-5 m-1">
-                 <RenderDish dish={props.dish} />
-        </div>
-        {/*nicher ta comment section*/}
+                        <div className="row">
+                                <Breadcrumb>
+                                    
+                                    <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                                </Breadcrumb>
+                            <div className="col-12">
+                                <h3>{props.dish.name}</h3>
+                                <hr />
+                            </div>
+                        </div>
 
-        <div className="col-12 col-md-5 m-1">
-                    <CardBody> 
-                    <RenderComments dish={props.dish} /> 
-                    {/* sender receiver same value thakte hobe as paramen */}
-                    </CardBody>            
+                        <div className="row">
+                                <RenderDish dish={props.dish} />
+                                <RenderComments comments={props.comments} /> 
+                                {/* sender receiver same value thakte hobe as paramen */}
+                        </div>
+                            
+        
                 
-        </div>
-            
-    </div> {/*row*/}
-           
-</div> //{/*duita bhagabhagi korte hobe*/}
-            
-          
-       );
-        }
+                </div> //{/*duita bhagabhagi korte hobe*/}
+                    
+                
+            );
+                }
 
 export default DishDetail;

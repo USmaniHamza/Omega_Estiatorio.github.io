@@ -31,6 +31,15 @@ class Main extends Component {
           leaders={this.state.leaders.filter((leader) => leader.featured)[0] }/>
         );// ektai array index ber hobe so index hocche zero since ekta featured eii khali true ase arki
     }
+       const DishWithId = ({match}) =>{
+      return(
+        <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+        comments={this.state.comments.filter((comment)=>comment.dishId=== parseInt(match.params.dishId,10))}
+        />
+        );
+
+       }
+
     return (
       <div>
         <Header/>
@@ -43,7 +52,10 @@ class Main extends Component {
     tahole shudh  {Menu} like pass kortam ar but this way of sending components wont let me pass any components to the menu component
     so we did that <Menu dishes={this.state.dishes}/> through a function component to pass props too
     */}
+        <Route path="/menu/:dishId" component={DishWithId}></Route>
+        {/* oporer shathe URL match kore so eta hoile ei nichertai choose korbe so exact dile /menu tai choose korbe */}
         <Route exact path="/contactus" component={Contact} />
+        {/* EKHANE */}
         <Redirect to="/home" />
         </Switch>
         <Footer />
