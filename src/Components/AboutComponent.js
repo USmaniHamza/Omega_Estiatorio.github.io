@@ -30,6 +30,7 @@ function About(props) {
     const leaders = props.leaders.map((leader) => {
         return (
             < RenderLeaders lead={leader} />
+            //using the renderleaders method
             // ekta ekta niye kore dicche
         );
     });
