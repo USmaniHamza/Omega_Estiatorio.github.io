@@ -62,7 +62,7 @@ function RenderDish({dish}){ //not used yet
                         <div className="row">
                                 <Breadcrumb>
                                     
-                                    <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                                    <BreadcrumbItem><Link to='/menu'>huhahuahuh</Link></BreadcrumbItem>
                                     <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
                                 </Breadcrumb>
                             <div className="col-12">

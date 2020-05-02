@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
 import DishDetail from './DishdetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
@@ -26,36 +27,39 @@ class Main extends Component {
   render(){ 
     const HomePage = () => {
         return(
-          <Home dish={this.state.dishes.filter((dish) => dish.featured)[0] } 
+          <Home dish={this.state.dishes.filter((dish) => dish.featured)[0] } //boolean return true jaader jaader featured hocche false
           promotions={this.state.promotions.filter((promo) => promo.featured)[0] }
           leaders={this.state.leaders.filter((leader) => leader.featured)[0] }/>
         );// ektai array index ber hobe so index hocche zero since ekta featured eii khali true ase arki
     }
-       const DishWithId = ({match}) =>{
-      return(
-        <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
-        comments={this.state.comments.filter((comment)=>comment.dishId=== parseInt(match.params.dishId,10))}
-        />
-        );
+          const DishWithId = ({match}) =>{
+          return( //ekhane shob onClick er kaj hocche
+            //shob onno page theke URL e details ta deya jar karone amra match .params diye ante partesi
+            <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+            comments={this.state.comments.filter((comment)=>comment.dishId=== parseInt(match.params.dishId,10))}
+            />
+            );
 
-       }
+          }
 
-    return (
+           
+
+
+    return (//React Routing through any page is basically what single page app is about
       <div>
         <Header/>
-        <Switch>
-          <Route path="/home" component={HomePage} /> 
+        <Switch> 
+        <Route path="/home" component={HomePage} /> 
           {/* path dibo ar kon component e jabo eta dibo 
           PATH hocche URL er*/}
-          <Route exact path="/menu" component={()=> <Menu dishes={this.state.dishes}/>} /> 
-    {/* in order to pass a props we did this inside the router....shudhu Component specify jodi kortam like component={Menu}
-    tahole shudh  {Menu} like pass kortam ar but this way of sending components wont let me pass any components to the menu component
-    so we did that <Menu dishes={this.state.dishes}/> through a function component to pass props too
-    */}
-        <Route path="/menu/:dishId" component={DishWithId}></Route>
+        <Route exact path="/menu" component={()=> <Menu dishes={this.state.dishes}/>} />    
+        <Route path="/menu/:dishId" component={DishWithId}></Route> 
+        {/* /menu/:dishId dishId ta ami naam disi so that doesnt matter...: er pore ja ase that would be counted as  */}
         {/* oporer shathe URL match kore so eta hoile ei nichertai choose korbe so exact dile /menu tai choose korbe */}
         <Route exact path="/contactus" component={Contact} />
         {/* EKHANE */}
+        {/* contact us e toh props diye toh kono kaj kore na so lage nai  */}
+        <Route exact path="/aboutus" component={()=> <About leaders={this.state.leaders}/>}  />        
         <Redirect to="/home" />
         </Switch>
         <Footer />

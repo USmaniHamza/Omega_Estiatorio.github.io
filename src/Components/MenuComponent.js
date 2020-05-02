@@ -2,13 +2,13 @@ import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb,BreadcrumbItem } from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-    function RenderMenuItem ({dish, onClick}) {
-        return (
+    function RenderMenuItem ({dish}) {
+        return ( //eta hocche before click display
             <Card>
                 <Link to={`/menu/${dish.id}`}> 
                 <CardImg width="100%" src={dish.image} alt={dish.name} />
                 <CardImgOverlay>
-                    <CardTitle>{dish.name}</CardTitle>
+                    <CardTitle>{dish.name}</CardTitle> 
                 </CardImgOverlay>
                 </Link>
             </Card>
@@ -16,11 +16,11 @@ import {Link} from 'react-router-dom';
     }
 
     const Menu = (props) => {
-
-        const menu = props.dishes.map((dish) => {
+//ekta jodi already array hoye thake tahole ki amra ki amra abar re-map korte parbo?
+        const menu = props.dishes.map((dish) => { //ONCLICK muche disi
             return (
                 <div className="col-12 col-md-5 m-1"  key={dish.id}>
-                    <RenderMenuItem dish={dish} onClick={props.onClick} />
+                    <RenderMenuItem dish={dish}/>
                 </div>
             );
         });
