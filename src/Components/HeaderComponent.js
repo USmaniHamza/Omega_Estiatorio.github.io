@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Navbar,NavbarBrand,Jumbotron, Nav, NavbarToggler,Collapse,NavItem } from 'reactstrap';
+import { Navbar,NavbarBrand,Jumbotron,Nav,NavbarToggler,Collapse,NavItem,Modal,Button,ModalHeader,ModalBody,Form,FormGroup,Input,Label } from 'reactstrap';
 import {NavLink} from 'react-router-dom';
 //reasons for adding a header or footer is so that all our applications can use this common header and footer
 //ekhane amra nav-bar banabo
@@ -12,21 +12,37 @@ class Header extends Component {
     constructor(props) {
          super(props);
          this.state={
-             isNavOpen:false
+             isNavOpen:false,
+             isModalOpen: false //this boolean variable will track the state of whether the modal is open or not
          };
          this.toggleNav=this.toggleNav.bind(this);
+         this.toggleModal=this.toggleModal.bind(this);
+         this.handleLogin=this.handleLogin.bind(this);
+
     }
 
 //toggleNav e switching er kaj hocche false thakle true true thakle false
 // to make the toggleNav available as "this.toggleNav" we have to bind this in a method
 /////////////////////////////////////////////////////////////////////IMPORTANT STH NEW OVER HERE
 ///NORMALLY KEMNE KORTAM
-    toggleNav(){
+    toggleNav(){ //khali toggle korbe agey
        this.setState({
-           isNavOpen: !this.state.isNavOpen
+            isNavOpen: !this.state.isNavOpen
        })
     }
+    toggleModal(){
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
+     }
 
+    handleLogin(event) {
+        this.toggleModal();
+        alert("Username : " + this.username.value + "Password : " + this.password.value + "Remember" + this.remember.checked);
+        event.preventDefault();
+    }
+    
+    
     render(){
         return(
             <> 
@@ -63,10 +79,49 @@ class Header extends Component {
                                     </NavLink>
                                     </NavItem>
                                 </Nav>
+                                {/* pushing the button as right as possible */}
+                                <Nav className="ml-auto" navbar> 
+                                    <NavItem>
+                                        {/* when clicked invoke the toggle modal */}
+                                        <Button outline onClick={this.toggleModal}>
+                                            <span className="fa fa-sign-in fa-lg"></span>
+                                            Log in
+                                        </Button>
+                                    </NavItem>
+                                </Nav>
                         </Collapse>
                     </div>
             </Navbar> 
             <Jumbotron>
+            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} > 
+            {/* set up korlam modal ekhon invoke er pala */}
+            {/* to invoke this we need a button in the navbar */}
+                <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                <ModalBody>
+                    <Form onSubmit={this.handleLogin}>
+                        <FormGroup>
+                            <Label htmlFor="uersname">Username</Label>
+                            <Input type="text" id="username" name="username"
+                            innerRef={(input)=>this.username = input} /> 
+                            {/* why not this.username.value */}
+                            {/* //method of extraction to make the values available to the react applications */}
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="password">Password</Label>
+                            <Input type="password" id="password" name="password"
+                            innerRef={(input)=>this.password = input} />
+                        </FormGroup>
+                        <FormGroup check>
+                            <Label check>
+                                <Input type="checkbox" name="remember" 
+                                innerRef={(input)=>this.remember = input} />
+                                Remember me
+                            </Label>
+                        </FormGroup>
+                        <Button type="submit" value="submit" color="bg-primary">Login</Button>
+                    </Form>
+                </ModalBody>
+            </Modal>
             <div className="container">
                 <div className="row row-header">
                     <div className="col-12 col-sm-6">
