@@ -14,11 +14,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         {/* React store becomes available to all the components within my React application */}
-      <BrowserRouter>
-      <div className="App"> 
-        <Main /> 
-      </div>
-      </BrowserRouter>
+          <BrowserRouter>
+          <div className="App"> 
+            <Main /> 
+          </div>
+          </BrowserRouter>
       </Provider>
     );
   } 
