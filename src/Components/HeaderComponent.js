@@ -48,49 +48,49 @@ class Header extends Component {
             <> 
             <Navbar dark expand="md">
                 {/* expand when in medium screen */}
-                    <div className="container">
-                        <NavbarToggler onClick={this.toggleNav} />
-                        {/* NabvarTOggler works with the collapse tag */}
-                        {/* adds a button to various grid systems */}
-                        <NavbarBrand className="mr-auto"  href="/" >
-                            <img src="assets/images/logo.png" height="30" width="41" alt="Ristorante Con Fusion" />
-                        </NavbarBrand>
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
-                            {/* isOpen boolean depends on a boolean variable */}
-                                <Nav navbar>
-                                    <NavItem>
-                                    <NavLink className="nav-link" to="/home">
-                                        <span className="fa fa-home fa-lg"></span> Home
-                                    </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                    <NavLink className="nav-link" to="/aboutus">
-                                        <span className="fa fa-info fa-lg"></span> About Us
-                                    </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                    <NavLink className="nav-link" to="/menu">
-                                        <span className="fa fa-list fa-lg"></span> Menu
-                                    </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                    <NavLink className="nav-link" to="/contactus">
-                                        <span className="fa fa-address-card fa-lg"></span> Contact Us
-                                    </NavLink>
-                                    </NavItem>
-                                </Nav>
-                                {/* pushing the button as right as possible */}
-                                <Nav className="ml-auto" navbar> 
-                                    <NavItem>
-                                        {/* when clicked invoke the toggle modal */}
-                                        <Button outline onClick={this.toggleModal}>
-                                            <span className="fa fa-sign-in fa-lg"></span>
-                                            Log in
-                                        </Button>
-                                    </NavItem>
-                                </Nav>
-                        </Collapse>
-                    </div>
+                <div className="container">
+                    <NavbarToggler onClick={this.toggleNav} />
+                    {/* NabvarTOggler works with the collapse tag */}
+                    {/* adds a button to various grid systems */}
+                    <NavbarBrand className="mr-auto"  href="/" >
+                        <img src="assets/images/logo.png" height="30" width="41" alt="Ristorante Con Fusion" />
+                    </NavbarBrand>
+                    <Collapse isOpen={this.state.isNavOpen} navbar>
+                        {/* isOpen boolean depends on a boolean variable */}
+                        <Nav navbar>
+                            <NavItem>
+                            <NavLink className="nav-link" to="/home">
+                                <span className="fa fa-home fa-lg"></span> Home
+                            </NavLink>
+                            </NavItem>
+                            <NavItem>
+                            <NavLink className="nav-link" to="/aboutus">
+                                <span className="fa fa-info fa-lg"></span> About Us
+                            </NavLink>
+                            </NavItem>
+                            <NavItem>
+                            <NavLink className="nav-link" to="/menu">
+                                <span className="fa fa-list fa-lg"></span> Menu
+                            </NavLink>
+                            </NavItem>
+                            <NavItem>
+                            <NavLink className="nav-link" to="/contactus">
+                                <span className="fa fa-address-card fa-lg"></span> Contact Us
+                            </NavLink>
+                            </NavItem>
+                        </Nav>
+                        {/* pushing the button as right as possible */}
+                        <Nav className="ml-auto" navbar> 
+                            <NavItem>
+                                {/* when clicked invoke the toggle modal */}
+                                <Button outline onClick={this.toggleModal}>
+                                    <span className="fa fa-sign-in fa-lg"></span>
+                                    Log in
+                                </Button>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </div>
             </Navbar> 
             <Jumbotron>
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} > 

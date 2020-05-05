@@ -1,6 +1,8 @@
 import React  from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Col ,BreadcrumbItem, Breadcrumb} from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Col ,BreadcrumbItem, Breadcrumb,Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
+
+import Commentform from './CommentformComponent';
 
 
 
@@ -18,8 +20,15 @@ function RenderComments({comments}){
         }); //chorami BUDDHI EI RENDER OCMMENTS TA PLEASE TAKE A LOOK
         return(
             <div>
+
                 <h4>Comments</h4>
-            {dishComments}
+                {dishComments}
+                
+                    <Commentform /> 
+                
+                
+{/* the button appearance */}
+
             </div>
         )
     }
@@ -38,8 +47,8 @@ function RenderDish({dish}){ //not used yet
                         <Card>
                             <CardImg width="100%"  src={dish.image} alt={dish.name}  />
                             <CardBody>                                    
-                                    <CardTitle>{dish.name}</CardTitle>
-                                    <CardText>{dish.description}</CardText>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
                             </CardBody>
                         </Card>
                     </div>
@@ -60,8 +69,7 @@ function RenderDish({dish}){ //not used yet
                 <div className="container">
 
                         <div className="row">
-                                <Breadcrumb>
-                                    
+                                <Breadcrumb>                                    
                                     <BreadcrumbItem><Link to='/menu'>huhahuahuh</Link></BreadcrumbItem>
                                     <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
                                 </Breadcrumb>
@@ -75,7 +83,10 @@ function RenderDish({dish}){ //not used yet
                                 <RenderDish dish={props.dish} />
                                 <RenderComments comments={props.comments} /> 
                                 {/* sender receiver same value thakte hobe as paramen */}
+                                
+                                
                         </div>
+                        
                             
         
                 
