@@ -28,8 +28,9 @@ class Commentform extends Component{
 
     
     handleSubmit(values){
-        console.log("Current state is: "+ JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+       this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+       //WHERE THE VALUES ARE ADDED
+       //EKHANEI KHELA TA HOY
         
     }
 
@@ -110,7 +111,7 @@ class Commentform extends Component{
 
 
 
-function RenderComments({comments}){  
+function RenderComments({comments, addComment, dishId}){  
         if(comments!=null){
            
             const dishComments=comments.map( (comment) => { 
@@ -128,7 +129,7 @@ function RenderComments({comments}){
                 <h4>Comments</h4>
                 {dishComments}
                 
-                    <Commentform /> 
+                    <Commentform dishId={dishId} addComment={addComment}/> 
                 
                 
 {/* the button appearance */}
@@ -185,7 +186,10 @@ function RenderDish({dish}){ //not used yet
 
                         <div className="row">
                                 <RenderDish dish={props.dish} />
-                                <RenderComments comments={props.comments} /> 
+                                <RenderComments comments={props.comments} 
+                                addComment ={props.addComment}
+                                dishId={props.dish.id}/> 
+                                {/* //props.dish.id taken from the props being sent */}
                                 {/* sender receiver same value thakte hobe as paramen */}
                                 
                                 

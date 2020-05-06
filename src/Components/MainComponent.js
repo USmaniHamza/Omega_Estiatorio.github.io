@@ -16,10 +16,17 @@ import { connect } from "react-redux";
 //once i obtain the react redux HOW do i connect the main components
 // because in this component we were storing the main components of the application
 // now this component needs to go an obtain that state from the Redux Store
+import {addComment} from '../redux/ActionCreators'; //the action creator
 
-const mapStateToProps = state => {
+const mapDispatchToProps =(dispatch) => ({
+  addComment:(dishId,rating,author,comment) => dispatch(addComment(dishId,rating,author,comment))
+  //now this function is available to use within our application
+
+});
+
+const mapStateToProps = state => { //state gula props e anlam then it will be available as this.props instead of this.state
   return {
-    dishes: state.dishes,
+    dishes: state.dishes, ///but where are the states 
     comments: state.comments,
     promotions: state.promotions,
     leaders: state.leaders
@@ -47,8 +54,9 @@ class Main extends Component {
           const DishWithId = ({match}) =>{
           return( //ekhane shob onClick er kaj hocche
             //shob onno page theke URL e details ta deya jar karone amra match .params diye ante partesi
-            <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
-            comments={this.props.comments.filter((comment)=>comment.dishId=== parseInt(match.params.dishId,10))}
+            <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}//ekta so ekta index[0] since ekta dish
+            comments={this.props.comments.filter((comment)=>comment.dishId=== parseInt(match.params.dishId,10))}// pura array tai since sets of comments
+            addComment={this.props.addComment} //dispatching the comment the user submitted
             />
             );
 
@@ -83,7 +91,8 @@ class Main extends Component {
   
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));
+
 //mapStatetoProps duita ase becareful
 //matha thanda na rakhle shesh 
 
