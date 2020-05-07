@@ -16,12 +16,13 @@ import { connect } from "react-redux";
 //once i obtain the react redux HOW do i connect the main components
 // because in this component we were storing the main components of the application
 // now this component needs to go an obtain that state from the Redux Store
-import {addComment} from '../redux/ActionCreators'; //the action creator
+import {addComment,fetchDishes} from '../redux/ActionCreators'; //the action creator
 
 const mapDispatchToProps =(dispatch) => ({
-  addComment:(dishId,rating,author,comment) => dispatch(addComment(dishId,rating,author,comment))
+  addComment:(dishId,rating,author,comment) => dispatch(addComment(dishId,rating,author,comment)),
   //now this function is available to use within our application
-
+  fetchDishes: () => {dispatch(fetchDishes())}
+  //so that fetchDishes becomes available in the main component to be used
 });
 
 const mapStateToProps = state => { //state gula props e anlam then it will be available as this.props instead of this.state
@@ -38,29 +39,35 @@ class Main extends Component {
     super(props);
   
   }
- 
- 
+  
+ componentDidMount(){
+  this.props.fetchDishes(); //doesnt mean the rest should be inherited too
+ }
  
   render(){ 
     const HomePage = () => {
         return(
-          <Home dish={this.props.dishes.filter((dish) => dish.featured)[0] } //boolean return true jaader jaader featured hocche false
+          <Home dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0] } //boolean return true jaader jaader featured hocche false
+          dishesLoading={this.props.dishes.isLoading}
+          dishesErrMess={this.props.dishes.errMess}
           promotions={this.props.promotions.filter((promo) => promo.featured)[0] }
           leaders={this.props.leaders.filter((leader) => leader.featured)[0] }/>
           //THE STATE WILL BE AVAILABLE HERE AS PROPS since THE PROPS WILL COME AS PROPERTIES FOR THE MAIN COMPONENT
 
         );// ektai array index ber hobe so index hocche zero since ekta featured eii khali true ase arki
     }
-          const DishWithId = ({match}) =>{
-          return( //ekhane shob onClick er kaj hocche
-            //shob onno page theke URL e details ta deya jar karone amra match .params diye ante partesi
-            <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}//ekta so ekta index[0] since ekta dish
-            comments={this.props.comments.filter((comment)=>comment.dishId=== parseInt(match.params.dishId,10))}// pura array tai since sets of comments
-            addComment={this.props.addComment} //dispatching the comment the user submitted
-            />
-            );
 
-          };
+    
+         const DishWithId = ({match}) => {
+      return(
+          <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+            isLoading={this.props.dishes.isLoading}
+            errMess={this.props.dishes.errMess}
+            comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
+            addComment={this.props.addComment}
+          />
+      );
+    };
 
            
 
