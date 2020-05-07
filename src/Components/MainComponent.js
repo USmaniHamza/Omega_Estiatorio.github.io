@@ -6,23 +6,17 @@ import About from './AboutComponent';
 import DishDetail from './DishdetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
-
-// import { DISHES } from '../shared/dishes'; 
-// import { COMMENTS } from '../shared/comments'; 
-// import { LEADERS } from '../shared/leaders'; 
-// import { PROMOTIONS } from '../shared/promotions'; 
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
-//once i obtain the react redux HOW do i connect the main components
-// because in this component we were storing the main components of the application
-// now this component needs to go an obtain that state from the Redux Store
 import {addComment,fetchDishes} from '../redux/ActionCreators'; //the action creator
+import {actions} from 'react-redux-form';
 
 const mapDispatchToProps =(dispatch) => ({
-  addComment:(dishId,rating,author,comment) => dispatch(addComment(dishId,rating,author,comment)),
-  //now this function is available to use within our application
-  fetchDishes: () => {dispatch(fetchDishes())}
-  //so that fetchDishes becomes available in the main component to be used
+  addComment:(dishId,rating,author,comment) => dispatch(addComment(dishId,rating,author,comment)),  
+  fetchDishes: () => {dispatch(fetchDishes())},  
+  resetFeedbackForm:() => {dispatch(actions.reset('feedback'))} //ADDING IN A NEW ACTION
+  //action for resetting the form
+  //updating the form for this 'feedback' in a short while
 });
 
 const mapStateToProps = state => { //state gula props e anlam then it will be available as this.props instead of this.state
@@ -84,7 +78,8 @@ class Main extends Component {
         <Route path="/menu/:dishId" component={DishWithId}/>
         {/* /menu/:dishId dishId ta ami naam disi so that doesnt matter...: er pore ja ase that would be counted as  */}
         {/* oporer shathe URL match kore so eta hoile ei nichertai choose korbe so exact dile /menu tai choose korbe */}
-        <Route exact path="/contactus" component={Contact} />
+        <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+        {/* //WHERE IS THIS PROPS COMING FROM INCASE OF THE UPPER LINE */}
         {/* EKHANE */}
         {/* contact us e toh props diye toh kono kaj kore na so lage nai  */}
         <Route exact path="/aboutus" component={()=> <About leaders={this.props.leaders}/>}  />        
