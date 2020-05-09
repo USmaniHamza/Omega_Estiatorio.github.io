@@ -16,15 +16,24 @@ export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
 
     return fetch(baseUrl + 'dishes')
-        .then(response => response.json())
+        .then(response => response.json()) //jodi response ashe tahole addDishes e bhorbo
         .then(dishes => dispatch(addDishes(dishes)));
 }
 
 export const fetchComments = () => (dispatch) => {    
-    return fetch(baseUrl + 'comments')
+    return fetch(baseUrl + 'comments') //fetching from the JSON-sERVER
     .then(response => response.json())
     .then(comments => dispatch(addComments(comments)));
 };
+
+export const fetchPromos = () => (dispatch) => {
+    
+    dispatch(promosLoading());
+
+    return fetch(baseUrl + 'promotions')
+    .then(response => response.json())
+    .then(promos => dispatch(addPromos(promos)));
+}
 
 export const commentsFailed = (errmess) => ({
     type: ActionTypes.COMMENTS_FAILED,
@@ -36,14 +45,7 @@ export const addComments = (comments) => ({
     payload: comments
 });
 
-export const fetchPromos = () => (dispatch) => {
-    
-    dispatch(promosLoading());
 
-    return fetch(baseUrl + 'promotions')
-    .then(response => response.json())
-    .then(promos => dispatch(addPromos(promos)));
-}
 
 export const promosLoading = () => ({
     type: ActionTypes.PROMOS_LOADING
