@@ -10,6 +10,7 @@ import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators'; //the action creator
 import {actions} from 'react-redux-form';
+import { TransitionGroup,CSSTransition } from "react-transition-group";
 
 const mapDispatchToProps = dispatch => ({
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
@@ -77,7 +78,11 @@ class Main extends Component {
     return (//React Routing through any page is basically what single page app is about
       <div>
         <Header/>
+        
         <div>
+        <TransitionGroup>
+          <CSSTransition key={this.props.location.key} classNames="page" timeout={300}> 
+          {/* //every component receives match key history so we are using location */}
         <Switch> 
         <Route path="/home" component={HomePage} /> 
           {/* path dibo ar kon component e jabo eta dibo 
@@ -93,7 +98,10 @@ class Main extends Component {
         <Route exact path="/aboutus" component={()=> <About leaders={this.props.leaders}/>}  />        
         <Redirect to="/home" />
         </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         </div>
+        
         <Footer />
       </div>
     );
