@@ -8,7 +8,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
-import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators'; //the action creator
+import { postComment, fetchDishes, fetchComments, fetchPromos ,fetchLeaders ,postFeedback} from '../redux/ActionCreators'; //the action creator
 import {actions} from 'react-redux-form';
 import { TransitionGroup,CSSTransition } from "react-transition-group";
 
@@ -17,8 +17,11 @@ const mapDispatchToProps = dispatch => ({
   fetchDishes: () => { dispatch(fetchDishes())},
   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
   fetchComments: () => {dispatch(fetchComments())},
-  fetchPromos: () => {dispatch(fetchPromos())}
-});
+  fetchPromos: () => {dispatch(fetchPromos())},
+  fetchLeaders: () => {dispatch(fetchLeaders())},
+  postFeedback: (values) => dispatch(postFeedback(values))
+  
+  });
 
 const mapStateToProps = state => { //state gula props e anlam then it will be available as this.props instead of this.state
   return {
@@ -39,6 +42,7 @@ class Main extends Component {
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();
+    this.props.fetchLeaders();
   }
  
   render(){ 
@@ -51,7 +55,10 @@ class Main extends Component {
               promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
               promoLoading={this.props.promotions.isLoading}
               promoErrMess={this.props.promotions.errMess}
-              leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+              leaders={this.props.leaders.leaders.filter((leaders) => leaders.featured)[0]} //***Assignment-4 why leaders.leaders */
+              leadersLoading={this.props.leaders.isLoading}
+              leadersErrMess={this.props.leaders.errMess}
+
           />
           //EKHANE PROMOS LOADING AR PROMOS ERRMESS  ADD KORA HOISE
           //THE STATE WILL BE AVAILABLE HERE AS PROPS since THE PROPS WILL COME AS PROPERTIES FOR THE MAIN COMPONENT
@@ -91,11 +98,12 @@ class Main extends Component {
         <Route path="/menu/:dishId" component={DishWithId}/>
         {/* /menu/:dishId dishId ta ami naam disi so that doesnt matter...: er pore ja ase that would be counted as  */}
         {/* oporer shathe URL match kore so eta hoile ei nichertai choose korbe so exact dile /menu tai choose korbe */}
-        <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+        <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}
+                                                                                    postFeedback={this.props.postFeedback}/>} />
         {/* //WHERE IS THIS PROPS COMING FROM INCASE OF THE UPPER LINE */}
         {/* EKHANE */}
         {/* contact us e toh props diye toh kono kaj kore na so lage nai  */}
-        <Route exact path="/aboutus" component={()=> <About leaders={this.props.leaders}/>}  />        
+        <Route exact path="/aboutus" component={()=> <About leaders={this.props.leaders} />}  />        
         <Redirect to="/home" />
         </Switch>
           </CSSTransition>

@@ -11,7 +11,7 @@ import {baseUrl} from '../shared/baseUrl';
                 <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} /> 
                 {/* FETCHING THE IMAGE */}
                 <CardImgOverlay>
-                    <CardTitle>{dish.name}</CardTitle> 
+                    <CardTitle className="topnav-right">{dish.name}</CardTitle> 
                 </CardImgOverlay>
                 </Link>
             </Card>

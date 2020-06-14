@@ -8,7 +8,7 @@ export const addComment = (comment) => ({
 });
 
 //////
-export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+export const postComment = (dishId,rating, author, comment) => (dispatch) => {
 
   const newComment = {
       dishId: dishId,
@@ -41,6 +41,45 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
   .then(response => response.json())
   .then(response => dispatch(addComment(response)))
   .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
+};
+
+///FEEDBACK
+
+
+
+export const postFeedback = (feedback) => (dispatch) => {
+  const newFeedback = Object.assign({ date: new Date().toISOString() }, feedback);
+  //ekshathe korse arki
+  
+  return fetch(baseUrl + 'feedback', {
+      method: 'POST',
+      body: JSON.stringify(newFeedback),
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+  })
+      .then(response => {
+          if (response.ok) {
+              return response;
+          } else {
+              var error = new Error('Error ' + response.status + ': ' + response.statusText);
+              error.response = response;
+
+              throw error;
+          }
+      },
+          error => {
+              var errorMessage = new Error(error.errorMessage);
+              throw errorMessage;
+          }
+      )
+      .then(response => response.json())
+      .then(response => dispatch(addComment(response)))
+      .catch(error => {
+          console.log('Post feedback: ' + error.message);
+          alert('Feedback could not be posted:\n' + error.message)
+      })
 };
 
 //////
@@ -108,6 +147,31 @@ export const fetchPromos = () => (dispatch) => {
     .then(promos => dispatch(addPromos(promos)))
     .catch(error => dispatch(promosFailed(error.message)));
 }
+///***Assignment4 where we used all the three actions in this thunk to make effective use of them and also to make the fetch available
+
+
+export const fetchLeaders = () => (dispatch) => {    
+  dispatch(leadersLoading());
+  return fetch(baseUrl + 'leaders')
+  .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+          var errmess = new Error(error.message);
+          throw errmess;
+    })
+  .then(response => response.json()) //ei response e ki ki ase 
+  .then(promos => dispatch(addLeaders(promos)))
+  .catch(error => dispatch(leadersFailed(error.message)));
+}
+
+
 
 export const commentsFailed = (errmess) => ({
     type: ActionTypes.COMMENTS_FAILED,
@@ -146,3 +210,23 @@ export const addDishes = (dishes) => ({
 export const dishesLoading = () => ({
     type:ActionTypes.DISHES_LOADING
  });
+
+/////***Assignement4
+//basically we created the actions here now to make them be used using thunk
+ export const addLeaders = (leaders) => ({
+  type: ActionTypes.ADD_LEADERS,
+  payload: leaders
+});
+///
+export const leadersLoading = () => ({
+  type: ActionTypes.LEADERS_LOADING,
+});
+
+export const leadersFailed = (errmess) => ({
+  type: ActionTypes.LEADERS_FAILED,
+  payload: errmess
+});
+
+
+
+//ADDED THREE NEW ACTIONS NOW TO FETCH THUNK THEM
